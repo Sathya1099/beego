@@ -1,5 +1,11 @@
 swagger: "2.0"
-info: {}
+info:
+  title: mobile API
+  description: |
+    mobile has every tool to get any job done, so codename for the new mobile APIs.
+  version: 1.0.0
+  contact:
+    email: astaxie@gmail.com
 basePath: /object
 paths: {}
 definitions:

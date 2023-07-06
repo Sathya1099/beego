@@ -22,6 +22,7 @@ type ObjectController struct {
 // @Failure 403 {string} error message
 // @router / [post]
 func (o *ObjectController) Post() {
+	o.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	var ob models.Object
 	err := json.Unmarshal(o.Ctx.Input.RequestBody, &ob)
 	if err != nil {
@@ -48,6 +49,7 @@ func (o *ObjectController) Post() {
 // @Failure 403 :objectId is empty
 // @router /:objectId [get]
 func (o *ObjectController) Get() {
+	o.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	objectId := o.Ctx.Input.Param(":objectId")
 	if objectId == "" {
 		o.Data["json"] = map[string]string{"errMessage": "objectId is empty"}
@@ -70,6 +72,7 @@ func (o *ObjectController) Get() {
 // @Failure 403 {string} error message
 // @router / [get]
 func (o *ObjectController) GetAll() {
+	o.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	obs, err := models.ReadAll()
 	if err != nil {
 		o.Data["json"] = map[string]string{"errMessage": err.Error()}
@@ -88,6 +91,7 @@ func (o *ObjectController) GetAll() {
 // @Failure 403 error messages
 // @router / [put]
 func (o *ObjectController) Put() {
+	o.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	var ob models.Object
 	err := json.Unmarshal(o.Ctx.Input.RequestBody, &ob)
 	if err != nil {
@@ -114,6 +118,7 @@ func (o *ObjectController) Put() {
 // @Failure 403 objectId is empty
 // @router /:objectId [delete]
 func (o *ObjectController) Delete() {
+	o.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	objectId := o.Ctx.Input.Param(":objectId")
 	if objectId == "" {
 		o.Data["json"] = map[string]string{"errMessage": "objectId is empty"}
