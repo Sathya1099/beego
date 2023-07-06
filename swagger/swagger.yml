@@ -1,11 +1,9 @@
 swagger: "2.0"
 info:
-  title: mobile API
+  title: Object API Example
   description: |
-    mobile has every tool to get any job done, so codename for the new mobile APIs.
+    an example of CRUD operations with object apis.
   version: 1.0.0
-  contact:
-    email: astaxie@gmail.com
 basePath: /object
 paths: {}
 definitions:

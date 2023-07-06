@@ -1,12 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "mobile API",
-        "description": "mobile has every tool to get any job done, so codename for the new mobile APIs.\n",
+        "title": "Object API Example",
+        "description": "an example of CRUD operations with object apis.\n",
         "version": "1.0.0",
-        "contact": {
-            "email": "astaxie@gmail.com"
-        }
+        "contact": {}
     },
     "basePath": "/object",
     "paths": null,

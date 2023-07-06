@@ -1,7 +1,6 @@
 // @APIVersion 1.0.0
-// @Title mobile API
-// @Description mobile has every tool to get any job done, so codename for the new mobile APIs.
-// @Contact astaxie@gmail.com
+// @Title Object API Example
+// @Description an example of CRUD operations with object apis.
 package routers
 
 import (
