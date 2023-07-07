@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/Sathya1099/beego/models"
 	"github.com/Sathya1099/beego/utils"
@@ -63,7 +64,8 @@ func (o *ObjectController) Get() {
 		o.Data["json"] = map[string]string{"errMessage": "objectId is empty"}
 		o.Ctx.Output.Status = http.StatusForbidden
 	} else {
-		ob, err := models.Read(objectId)
+		id, _ := strconv.Atoi(objectId)
+		ob, err := models.Read(id)
 		if err != nil {
 			logs.Error(err)
 			o.Data["json"] = map[string]string{"errMessage": err.Error()}
@@ -98,7 +100,6 @@ func (o *ObjectController) GetAll() {
 
 // @Title Update
 // @Description update the object
-// @Param	objectId		path 	string	true		"The objectid you want to update"
 // @Param	body		body 	models.Object	true		"The body"
 // @Success 200 {object} models.Object
 // @Failure 403 error messages
@@ -113,7 +114,7 @@ func (o *ObjectController) Put() {
 		o.Data["json"] = map[string]string{"errMessage": "error while unmarshaling"}
 		o.Ctx.Output.Status = http.StatusForbidden
 	} else {
-		if validateErrors := utils.Validate(&ob); validateErrors != nil {
+		if validateErrors := utils.ValidateForUpdate(&ob); validateErrors != nil {
 			logs.Error(validateErrors)
 			o.Data["json"] = map[string][]string{"errMessages": validateErrors}
 			o.Ctx.Output.Status = http.StatusForbidden
@@ -144,7 +145,8 @@ func (o *ObjectController) Delete() {
 		o.Data["json"] = map[string]string{"errMessage": "objectId is empty"}
 		o.Ctx.Output.Status = http.StatusForbidden
 	} else {
-		err := models.Delete(objectId)
+		id, _ := strconv.Atoi(objectId)
+		err := models.Delete(id)
 		if err != nil {
 			logs.Error(err)
 			o.Data["json"] = map[string]string{"errMessage": err.Error()}

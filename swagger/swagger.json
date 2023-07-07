@@ -35,13 +35,6 @@
                 "operationId": "ObjectController.Update",
                 "parameters": [
                     {
-                        "in": "path",
-                        "name": "objectId",
-                        "description": "The objectid you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
                         "in": "body",
                         "name": "body",
                         "description": "The body",

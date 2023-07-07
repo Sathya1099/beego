@@ -21,3 +21,21 @@ func Validate(object *models.Object) (validateErrors []string) {
 	}
 	return validateErrors
 }
+
+func ValidateForUpdate(object *models.Object) (validateErrors []string) {
+	valid := validation.Validation{}
+
+	if object.Score != 0 {
+		valid.Range(object.Score, 0, 500, "score")
+	}
+	if object.PlayerName != "" {
+		valid.MinSize(object.PlayerName, 3, "player_name")
+	}
+	if valid.HasErrors() {
+		for _, err := range valid.Errors {
+			logs.Error(err)
+			validateErrors = append(validateErrors, err.Message)
+		}
+	}
+	return validateErrors
+}

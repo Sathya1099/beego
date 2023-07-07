@@ -1,8 +1,8 @@
 package models
 
 type Object struct {
-	ObjectId   string `json:"object_id" orm:"pk"`
-	Score      int    `json:"score" valid:"Range(500)" orm:"column(score)"`
+	ObjectId   int    `json:"object_id" orm:"pk"`
+	Score      int    `json:"score" valid:"Range(0,500)" orm:"column(score)"`
 	PlayerName string `json:"player_name" valid:"MinSize(3)" orm:"column(playername)"`
 }
 
@@ -16,7 +16,7 @@ func InsertMulti(objects []Object) error {
 	return err
 }
 
-func Read(objId string) (*Object, error) {
+func Read(objId int) (*Object, error) {
 	b := &Object{ObjectId: objId}
 	err := ormer.Read(b)
 	if err != nil {
@@ -43,14 +43,14 @@ func Update(object *Object) error {
 	if object.PlayerName != "" {
 		fields = append(fields, "PlayerName")
 	}
-	_, err := ormer.Update(&object, fields...)
+	_, err := ormer.Update(object, fields...)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func Delete(objId string) error {
+func Delete(objId int) error {
 	object := Object{ObjectId: objId}
 	_, err := ormer.Delete(&object)
 	if err != nil {
