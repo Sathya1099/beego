@@ -11,7 +11,6 @@ import (
 var ormer orm.Ormer
 
 func init() {
-	//orm.Debug = true
 	orm.RegisterModel(new(Object))
 	user, _ := config.String("dbuser")
 	pass, _ := config.String("dbpass")

@@ -4,8 +4,107 @@ info:
   description: |
     an example of CRUD operations with object apis.
   version: 1.0.0
-basePath: /object
-paths: {}
+basePath: /v1
+paths:
+  /object/:
+    get:
+      tags:
+      - object
+      description: |-
+        get all objects
+        <br>
+      operationId: ObjectController.GetAll
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Object'
+        "403":
+          description: '{string} error message'
+    put:
+      tags:
+      - object
+      description: |-
+        update the object
+        <br>
+      operationId: ObjectController.Update
+      parameters:
+      - in: path
+        name: objectId
+        description: The objectid you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: The body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Object'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Object'
+        "403":
+          description: error messages
+    post:
+      tags:
+      - object
+      description: |-
+        create object
+        <br>
+      operationId: ObjectController.Create
+      parameters:
+      - in: body
+        name: body
+        description: The object content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Object'
+      responses:
+        "200":
+          description: '{string} success message'
+        "403":
+          description: '{string} error message'
+  /object/{objectId}:
+    get:
+      tags:
+      - object
+      description: |-
+        find object by objectid
+        <br>
+      operationId: ObjectController.Get
+      parameters:
+      - in: path
+        name: objectId
+        description: the objectid you want to get
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Object'
+        "403":
+          description: :objectId is empty
+    delete:
+      tags:
+      - object
+      description: |-
+        delete the object
+        <br>
+      operationId: ObjectController.Delete
+      parameters:
+      - in: path
+        name: objectId
+        description: The objectId you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: objectId is empty
 definitions:
   models.Object:
     title: Object
@@ -18,3 +117,7 @@ definitions:
       score:
         type: integer
         format: int64
+tags:
+- name: object
+  description: |
+    Operations about object

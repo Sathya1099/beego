@@ -2,7 +2,7 @@ package models
 
 type Object struct {
 	ObjectId   string `json:"object_id" orm:"pk"`
-	Score      int    `json:"score" valid:"MaxSize(500)" orm:"column(score)"`
+	Score      int    `json:"score" valid:"Range(500)" orm:"column(score)"`
 	PlayerName string `json:"player_name" valid:"MinSize(3)" orm:"column(playername)"`
 }
 

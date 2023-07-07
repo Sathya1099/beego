@@ -1,23 +1,21 @@
 package utils
 
 import (
-	"log"
-
 	"github.com/Sathya1099/beego/models"
 
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/validation"
 )
 
 func Validate(object *models.Object) (validateErrors []string) {
 	valid := validation.Validation{}
-	b, err := valid.Valid(&object)
+	b, err := valid.Valid(object)
 	if err != nil {
-		validateErrors = append(validateErrors, err.Error())
-		return validateErrors
+		logs.Error(err)
 	}
 	if !b {
 		for _, err := range valid.Errors {
-			log.Println(err.Key, err.Message)
+			logs.Error(err)
 			validateErrors = append(validateErrors, err.Message)
 		}
 	}
